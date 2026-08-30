@@ -1,6 +1,6 @@
 # 🚦 토큰 신호등 (Token Traffic Light)
 
-Windows 작업표시줄 알림영역(시계 옆)에 신호등 모양 아이콘으로 **Claude Code 실제 사용 한도**를 실시간으로 보여주는 트레이 모니터입니다.
+Windows 작업표시줄 / macOS 메뉴 막대의 알림영역(시계 옆)에 신호등 모양 아이콘으로 **Claude Code 실제 사용 한도**를 실시간으로 보여주는 트레이 모니터입니다. Windows용(`token_tray_monitor_windows.pyw`)과 macOS용(`token_tray_monitor_mac.py`) 두 가지 버전을 제공합니다.
 
 ![대표 이미지](images/01_대표이미지.png)
 
@@ -38,16 +38,38 @@ Claude Code를 활용해 Windows 작업표시줄에 상시 떠 있는 신호등 
 
 ## 설치 및 실행
 
+### Windows
+
 ```bash
 python -m pip install pystray Pillow
 ```
 
-이 폴더에서 `token_tray_monitor.pyw`를 더블클릭하면 검은 콘솔창 없이 조용히 실행되고, 작업표시줄 알림영역에 신호등 아이콘이 나타납니다. `claude` CLI가 PATH에 있고 로그인되어 있어야 세션/주간 한도가 표시됩니다.
+이 폴더에서 `token_tray_monitor_windows.pyw`를 더블클릭하면 검은 콘솔창 없이 조용히 실행되고, 작업표시줄 알림영역에 신호등 아이콘이 나타납니다.
 
-끄고 싶을 때: 아이콘 우클릭 → 종료
+### macOS
+
+> macOS는 `.pyw`/`.py` 파일에 대한 더블클릭 실행 연결이 없어서, Windows용 파일을 그대로 더블클릭하면 아무 반응이 없습니다. macOS에서는 아래 macOS 전용 버전을 사용하세요.
+
+```bash
+pip3 install pystray Pillow
+```
+
+(macOS에서는 `pip install pystray`만 해도 pyobjc 관련 macOS 백엔드 의존성이 함께 설치됩니다.)
+
+이 폴더에서 `run_mac.command`를 더블클릭하면(최초 1회 "확인되지 않은 개발자" 경고가 뜨면 우클릭 → 열기) 필요한 패키지를 자동 설치하고 메뉴 막대에 신호등 아이콘을 띄웁니다. 터미널에서 직접 실행하려면:
+
+```bash
+python3 token_tray_monitor_mac.py
+```
+
+### 공통
+
+`claude` CLI가 PATH에 있고 로그인되어 있어야 세션/주간 한도가 표시됩니다.
+
+끄고 싶을 때: 아이콘 우클릭(macOS는 클릭) → 종료
 
 ## 참고
 
-- 컨텍스트 %, 갱신 주기, 모델별 단가 등은 `token_tray_monitor.pyw` 상단 설정값에서 조정할 수 있습니다.
+- 컨텍스트 %, 갱신 주기, 모델별 단가 등은 각 스크립트(`token_tray_monitor_windows.pyw` / `token_tray_monitor_mac.py`) 상단 설정값에서 조정할 수 있습니다.
 - 비용($)은 추정치이며 실제 청구서와 다를 수 있습니다.
 - 인터넷 접속이나 별도 API 키 없이, 로컬 `claude` CLI와 로그 파일만으로 동작합니다.
