@@ -28,19 +28,24 @@ if ! python3 -c "import pystray, PIL" 2>/dev/null; then
     fi
 fi
 
-echo ""
-echo "실행 중입니다. 화면 오른쪽 위 메뉴바를 확인해주세요."
-echo "(이 창을 닫으면 신호등도 같이 꺼집니다)"
-echo ""
-python3 token_tray_monitor_mac.py
-status=$?
+nohup python3 token_tray_monitor_mac.py > token_tray_monitor.log 2>&1 &
+disown
+sleep 2
+
+if ! kill -0 $! 2>/dev/null; then
+    echo ""
+    echo "[오류] 실행 직후 종료됐습니다. 아래 로그를 캡처해서 알려주세요:"
+    echo "----------------------------------------------------"
+    cat token_tray_monitor.log
+    echo "----------------------------------------------------"
+    read -n 1 -s -r -p "아무 키나 누르면 창이 닫힙니다..."
+    exit 1
+fi
 
 echo ""
 echo "===================================================="
-if [ $status -ne 0 ]; then
-    echo " 프로그램이 오류와 함께 종료됐습니다 (코드 $status). 위 메시지를 캡처해서 알려주세요."
-else
-    echo " 프로그램이 종료됐습니다."
-fi
+echo " 실행됐습니다! 화면 오른쪽 위 메뉴바를 확인해주세요."
+echo " 이 창은 이제 닫으셔도 신호등은 계속 켜져 있습니다."
+echo " 끄고 싶을 땐: 메뉴바 아이콘 클릭 -> 종료"
 echo "===================================================="
-read -n 1 -s -r -p "아무 키나 누르면 창이 닫힙니다..."
+read -n 1 -s -r -p "아무 키나 누르면 이 창이 닫힙니다 (신호등은 계속 켜져 있어요)..."
