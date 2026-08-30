@@ -2,7 +2,7 @@
 
 Windows 작업표시줄 / macOS 메뉴 막대의 알림영역(시계 옆)에 신호등 모양 아이콘으로 **Claude Code 실제 사용 한도**를 실시간으로 보여주는 트레이 모니터입니다. Windows용(`token_tray_monitor_windows.pyw`)과 macOS용(`token_tray_monitor_mac.py`) 두 가지 버전을 제공합니다.
 
-![대표 이미지](images/01_대표이미지.png)
+![대표 이미지](images/01_main.png)
 
 ## 해결하고자 한 문제
 
@@ -18,11 +18,11 @@ Claude Code를 쓰다 보면 세션(5시간)·주간 사용량이 얼마나 남�
 
 | 트레이 아이콘 + 툴팁 | 우클릭 메뉴 |
 |---|---|
-| ![툴팁](images/02_트레이_툴팁.png) | ![메뉴](images/03_우클릭_메뉴.png) |
+| ![툴팁](images/02_tray_tooltip.png) | ![메뉴](images/03_context_menu.png) |
 
 | 신호등 3단계 | 동작 원리 |
 |---|---|
-| ![3단계](images/04_신호등_3단계.png) | ![동작원리](images/05_동작원리.png) |
+| ![3단계](images/04_traffic_light_stages.png) | ![동작원리](images/05_how_it_works.png) |
 
 ## AI 활용 방식 및 결과
 
